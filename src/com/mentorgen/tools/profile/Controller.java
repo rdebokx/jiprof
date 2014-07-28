@@ -361,7 +361,6 @@ public class Controller implements Runnable {
 	private static final String DEFAULT_THREAD_COMPACT_THRESHOLD = "10";
 	private static final String DEFAULT_MAX_METHOD_COUNT = "-1";
 	private static final String DEFAULT_METHOD_COMPACT_THRESHOLD = "10";
-	private static final String DEFAULT_FILE="profile.txt";
 	private static final String DEFAULT_OBJECT_ALLOC = "off";
 	private static final String DEFAULT_PROFILER_CLASS = "com.mentorgen.tools.profile.runtime.Profile";
 	
@@ -435,7 +434,6 @@ public class Controller implements Runnable {
 		String threadCompactThreshold = getProperty(props, "thread.compact.threshold.ms", DEFAULT_THREAD_COMPACT_THRESHOLD);
 		String maxMethodCount = getProperty(props, "max-method-count", DEFAULT_MAX_METHOD_COUNT);
 		String methodCompactThreshold = getProperty(props, "method.compact.threshold.ms", DEFAULT_METHOD_COMPACT_THRESHOLD);
-		String file = getProperty(props,"file", DEFAULT_FILE);
 		String objectAlloc = getProperty(props,"track.object.alloc", DEFAULT_OBJECT_ALLOC);
 		String outputType = getProperty(props, "output", "text");
 		String debug = getProperty(props, "debug", "off");
@@ -491,8 +489,6 @@ public class Controller implements Runnable {
 		if ("yes".equalsIgnoreCase(outputSummaryOnly)) {
 			_outputSummaryOnly = true;
 		}
-		
-		Controller._fileName = file;
 		
 		String excludeList = props.getProperty("exclude");
 		String includeList = props.getProperty("include");

@@ -48,12 +48,20 @@ public class Main {
 	 * @param args
 	 * @param inst
 	 */
+    
 	public static void premain(String args, Instrumentation inst) {
 		Properties props = null;
 		
-		if (args != null && args.length() != 0 && !args.equals("null")) {
-			System.err.println("The -javaagent:foo=bar syntax is no " +
-					"longer supported.");
+		String outputFile = "profile.txt";
+		if (args.length() > 0) {
+		    String[] option = args.split("=");
+		    if(option.length == 2 && option[0].equals("out")){
+		        outputFile = option[1];
+		    } else {
+		        System.out.println("Output file path could not be parsed. Continue using defaults.");
+		    }
+		} else if (args != null && args.length() != 0 && !args.equals("null")) {
+			System.err.println("The -javaagent:foo=bar syntax is only supported for out=[outputFile]");
 			System.err.println("Use the VM property profile.properties " +
 					"instead.");
 			System.err.println("Continuing using the defaults.");
@@ -72,6 +80,7 @@ public class Main {
 				// leave the props file empty
 			}
 		}
+		Controller._fileName = outputFile;
 		
 		inst.addTransformer(new Transformer());
 	}
